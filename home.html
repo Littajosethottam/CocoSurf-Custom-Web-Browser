@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CocoSurf</title>
+    <meta charset="UTF-8" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: sans-serif;
+            background: #fff;
+            overflow: hidden;
+        }
+        body {
+            width: 100vw;
+            height: 100vh;
+            min-height: 100vh;
+            min-width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: #fff;
+            transition: background 0.4s;
+        }
+        .bg-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 300px;
+            min-height: 300px;
+            width: 65vw;
+            height: 65vw;
+            max-width: 500px;
+            max-height: 500px;
+            opacity: 0.11;
+            z-index: 0;
+            pointer-events: none;
+            object-fit: contain;
+            transition: opacity 0.3s;
+        }
+        .center-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        .search-title {
+            font-size: 2.4rem;
+            font-weight: bold;
+            color: #237C5A;
+            margin-bottom: 38px;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 8px #0001;
+            transition: color 0.3s;
+        }
+        .search-widget {
+            width: 90vw;
+            max-width: 400px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background: #fff;
+            box-shadow: 0 2px 22px #0002;
+            border-radius: 60px;
+            padding: 0px 14px 0px 18px;
+            transition: background 0.4s, box-shadow 0.3s;
+        }
+        .search-widget input {
+            border: none;
+            outline: none;
+            font-size: 1.4rem;
+            width: 100%;
+            padding: 14px 8px;
+            border-radius: 60px;
+            background: transparent;
+            color: #111;
+            transition: color 0.3s;
+        }
+        .search-widget button {
+            border: none;
+            outline: none;
+            font-size: 1.4rem;
+            padding: 12px 18px 12px 12px;
+            border-radius: 60px;
+            cursor: pointer;
+            background: #38D7A4;
+            color: #fff;
+            font-weight: bold;
+            margin-left: 12px;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .search-widget button:hover {
+            background: #177663;
+        }
+        .icon-search {
+            width: 22px;
+            height: 22px;
+            fill: #fff;
+            display: inline-block;
+        }
+        .toggle {
+            position: fixed;
+            top: 14px;
+            right: 16px;
+            font-size: 2.1em;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+            color: #237C5A;
+            opacity: 0.83;
+            transition: color 0.3s;
+        }
+        body.dark {
+            background: #151a1a;
+        }
+        body.dark .search-widget {
+            background: #222;
+            box-shadow: 0 2px 22px #0009;
+        }
+        body.dark .bg-logo {
+            opacity: 0.18;
+        }
+        body.dark .search-title {
+            color: #80e7ce;
+        }
+        body.dark input {
+            color: #eee;
+        }
+        body.dark .toggle {
+            color: #70f6ce;
+        }
+        @media (max-width:600px) {
+            .search-title {
+                font-size: 1.4rem;
+                margin-bottom: 18px;
+            }
+            .search-widget {
+                max-width: 90vw;
+                padding: 0px 6px 0px 10px;
+            }
+            .bg-logo {
+                min-width: 160px;
+                min-height: 160px;
+                width: 80vw;
+                height: 80vw;
+                max-width: 320px;
+                max-height: 320px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="toggle" onclick="toggleMode()" aria-label="Toggle light/dark mode">🌗</button>
+    <!-- Change src to CocoSurf.png.png if that's your file name -->
+    <img src="CocoSurf.png" alt="CocoSurf Logo" class="bg-logo">
+    <div class="center-content">
+        <div class="search-title">CocoSurf</div>
+        <form class="search-widget" action="https://www.google.com/search" method="get" target="_blank">
+            <input type="text" name="q" placeholder="Search Google..." autofocus>
+            <button type="submit" aria-label="Search">
+                <svg class="icon-search" viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8" stroke="white" stroke-width="2" fill="none"/>
+                    <line x1="17" y1="17" x2="21" y2="21" stroke="white" stroke-width="2" />
+                </svg>
+            </button>
+        </form>
+    </div>
+    <script>
+      function setMode(dark) {
+        if (dark) {
+          document.body.classList.add('dark');
+        } else {
+          document.body.classList.remove('dark');
+        }
+      }
+      function toggleMode() {
+        const isDark = document.body.classList.contains('dark');
+        setMode(!isDark);
+      }
+      // Set default based on system preference
+      setMode(window.matchMedia('(prefers-color-scheme: dark)').matches);
+    </script>
+</body>
+</html>
